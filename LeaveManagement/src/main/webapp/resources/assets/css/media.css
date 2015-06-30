@@ -1,0 +1,103 @@
+@media screen and (max-width:1200px) {
+	.row_div_margin {
+		margin-left: 10% !important;
+		margin-right: 10% !important;
+		padding: 0%;
+		border: 1px solid red;
+	}
+}
+
+@media screen and (max-width:900px) {
+	.row_div_margin {
+		margin-left: 5% !important;
+		margin-right: 5% !important;
+		padding: 0%;
+		border: 1px solid yellow;
+	}
+}
+
+@media screen and (max-width:321px) {
+	.row_div_margin {
+		margin-left: 1% !important;
+		margin-right: 1% !important;
+		padding: 0%;
+		border: 1px solid green;
+	}
+}
+
+@media screen and (max-width:1920) {
+	.white_box_height {
+		max-height: 800px;
+		overflow-y: scroll;
+	}
+}
+
+@media screen and (min-width:1226) {
+	.action_button_left_margin {
+		margin-left: 82%;
+	}
+}
+
+@media screen and (max-width: 1278px) and (min-width :929px) {
+	.action_button_left_margin_register_employee_page {
+		margin-left: 73%;
+	}
+}
+
+@media screen and (max-width: 929px) and (min-width :877px) {
+	.action_button_left_margin_register_employee_page {
+		margin-left: 71%;
+	}
+}
+
+@media screen and (max-width: 877px) and (min-width :833px) {
+	.action_button_left_margin_register_employee_page {
+		margin-left: 69%;
+	}
+}
+
+@media screen and (max-width: 833px) and (min-width :793px) {
+	.action_button_left_margin_register_employee_page {
+		margin-left: 67%;
+	}
+}
+
+@media screen and (max-width: 793px) and (min-width :768px) {
+	.action_button_left_margin_register_employee_page {
+		margin-left: 65%;
+	}
+}
+
+@media screen and (max-width: 767px) and (min-width :714px) {
+	.action_button_left_margin_register_employee_page {
+		margin-left: 70%;
+	}
+}
+
+@media screen and (max-width: 714px) and (min-width :663px) {
+	.action_button_left_margin_register_employee_page {
+		margin-left: 67%;
+	}
+}
+
+@media screen and (max-width: 663px) and (min-width :619px) {
+	.action_button_left_margin_register_employee_page {
+		margin-left: 64%;
+	}
+}
+@media screen and (max-width: 619px) and (min-width :583px) {
+	.action_button_left_margin_register_employee_page {
+		margin-left: 61%;
+	}
+}
+
+@media screen and (max-width: 583px) and (min-width :551px) {
+	.action_button_left_margin_register_employee_page {
+		margin-left: 58%;
+	}
+}
+@media screen and (max-width: 551px) and (min-width :500px) {
+	.action_button_left_margin_register_employee_page {
+		margin-left: 50%;
+	}
+}

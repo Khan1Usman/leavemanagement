@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Leave Management</title>
+
+	<!-- Bootstrap Core CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+	<!-- Fonts -->
+	<link href="font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
+	<link href="css/nivo-lightbox.css" rel="stylesheet" />
+	<link href="css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
+	<link href="css/animate.css" rel="stylesheet" />
+	<!-- Squad theme CSS -->
+	<link href="css/style.css" rel="stylesheet">
+	<link href="css/base.css" rel="stylesheet">
+
+</head>
+
+<body data-spy="scroll" style="background:#fff;">
+
+	<div class="container">
+		<ul id="gn-menu" class="gn-menu-main" style="box-shadow:0 3px 5px rgb(0, 0, 0);">
+			<li class="gn-trigger" style="display:none;">
+				<a class="gn-icon gn-icon-menu"><span>Menu</span></a>
+				<nav class="gn-menu-wrapper">
+					<div class="gn-scroller">
+						<ul class="gn-menu">
+							<li class="gn-search-item">
+								<input placeholder="Search" type="search" class="gn-search">
+								<a class="gn-icon gn-icon-search"><span>Search</span></a>
+							</li>
+							<li>
+								<a href="#about" class="gn-icon gn-icon-download">About</a>
+							</li>
+							<li><a href="#service" class="gn-icon gn-icon-cog">Service</a></li>
+							<li><a href="#works" class="gn-icon gn-icon-help">Works</a></li>
+							<li>
+								<a href="#contact" class="gn-icon gn-icon-archive">Contact</a>
+							</li>
+						</ul>
+					</div>
+					<!-- /gn-scroller -->
+				</nav>
+			</li>
+			<li id="long_menu" onclick="hide_show_longmenu();">
+				<a class="gn-icon gn-icon-menu gn-selected"><span>Menu</span></a>
+			</li>
+			<li><a href="index.html">Leave Management</a></li>
+			<li>
+				<ul class="company-social">
+					<li class="social-facebook"><a href="#" target="_blank"><i class="fa fa-bell-o"></i></a></li>
+					<li class="social-twitter"><a href="#" target="_blank"><i class="fa fa-cog"></i></a></li>
+					<li class="social-dribble"><a href="#" target="_blank"><i class="fa fa-dribbble"></i></a></li>
+				</ul>	
+			</li>
+		</ul>
+	</div>
+
+
+
+
+	<div class="container-fluid ">
+		<div class="row">
+
+			<div id="large_menu" class="col-lg-2 col-md-3 col-sm-3 menu_back" style="paddin:0;">
+				<ul class="menu_large">
+					<li>
+						<a href="#about" class="gn-icon gn-icon-download">About</a>
+					</li>
+					<li><a href="#service" class="gn-icon gn-icon-cog">Service</a></li>
+					<li><a href="#works" class="gn-icon gn-icon-help">Works</a></li>
+					<li>
+						<a href="#contact" class="gn-icon gn-icon-archive">Contact</a>
+					</li>
+				</ul>
+			</div>
+			<div id="main_div1" class="col-lg-6 col-md-8 col-sm-10 col-lg-offset-3 col-md-offset-2 col-sm-offset-1"  style="padding-top:100px;padding-bottom:50px;">
+				<div class="white_box" style="box-shadow:0 0 5px rgb(0, 0, 0);">
+					
+					<div class="profile_back">
+						<div class="col-lg-10 padding_50">
+							<div class="col-lg-3">
+							<img data-ng-show="{{employeeUpdateInfoData.profilePic.length !=''}}" src="{{employeeUpdateInfoData.profilePic}}" style="height:100px; width=100px;float:left;">
+							<img data-ng-show="{{employeeUpdateInfoData.profilePic.length ==''}}" src="./resources/assets/img/defult_profile_pic.png" style="height:100px; width=100px;float:left;">
+							</div>
+							<div class="col-lg-8">
+							<h1 class="head_name">{{employeeUpdateInfoData.firstName}} {{employeeUpdateInfoData.lastName}}</h1>
+							<p class="test">Senior Software Tester</p>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="col-lg-10 col-lg-offset-1 " style="padding-top:100px;">
+						<div class="img_round">
+							<div style="clear:both;">
+								<img src="./resources/assets/img/icon_basic_info.png">
+							</div>
+						</div>
+						<div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6 border3px">
+							<p class="date">Full Name</p>
+							<p class="date">Date Of Birth</p>
+							<p class="date">E-Mail</p>
+							<p class="date">Mobile No</p>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<p class="date1">{{employeeUpdateInfoData.firstName}} {{employeeUpdateInfoData.middleName}} {{employeeUpdateInfoData.lastName}}</p>
+							<p class="date1">{{employeeUpdateInfoData.birthDay}}-{{employeeUpdateInfoData.birthdayMonth}}-{{employeeUpdateInfoData.birthdayYear}} </p>
+							<p class="date1">{{employeeUpdateInfoData.email}}</p>
+							<p class="date1">123456789</p>
+						</div>
+						<div class="img_round" style="position:relative;z-index:1;">
+							<div style="clear:both;">
+								<img src="./resources/assets/img/icon_contact.png">
+							</div>
+						</div>
+						<div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6 border3px">
+							<p class="date">Comunication Address</p><br>
+							<p class="date">Permanent Address</p><br>
+							<p class="date">Alternate Email</p>
+							<p class="date">Alternate Mobile</p>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<p class="date1">{{employeeUpdateInfoData.localAddress}} </p><br>
+							<p class="date1">{{employeeUpdateInfoData.parmanentAddress}}</p><br>
+							<p class="date1">{{employeeUpdateInfoData.alternetEmail}}</p>
+							<p class="date1">{{employeeUpdateInfoData.alternateMobile}}</p>
+						</div>
+						<div class="img_round" style="position:relative;z-index:1;">
+							<div style="clear:both;">
+								<img src="./resources/assets/img/icon_education.png">
+							</div>
+						</div>
+						<div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6 border3px" style="padding-bottom:40px;">
+							<p class="date">School </p><br><br>
+							<p class="date">Univercity</p>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<p class="date1" style="margin-bottom:8px;">Lorem Ipsum is simply dummy text of the printing and </p>
+							<p class="date1">Lorem Ipsum is simply dummy text of the printing and </p>
+						</div>
+					</div>
+					<div class="border_bottom">
+						
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+
+		<!-- Core JavaScript Files -->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.easing.min.js"></script>	
+		<script src="js/classie.js"></script>
+		<script src="js/gnmenu.js"></script>
+		<script src="js/jquery.scrollTo.js"></script>
+		<script src="js/nivo-lightbox.min.js"></script>
+		<script src="js/stellar.js"></script>
+		<!-- Custom Theme JavaScript -->
+		<script src="js/custom.js"></script>
+		<script src="js/long_menu.js"></script>
+
+	</body>
+
+	</html>

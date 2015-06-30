@@ -1,0 +1,113 @@
+<div class="container-fluid">
+	<div class="row">
+		<div id="large_menu" data-ng-class="{'div-animate': toggleSideMenu}"
+			class="col-lg-2 col-md-3 col-sm-3 menu_back" style="paddin: 0;">
+			<ul class="menu_large">
+				<li><a href="#about" class="gn-icon gn-icon-download">About</a></li>
+				<li><a href="#service" class="gn-icon gn-icon-cog">Service</a></li>
+				<li><a href="#works" class="gn-icon gn-icon-help">Works</a></li>
+				<li><a href="#contact" class="gn-icon gn-icon-archive">Contact</a></li>
+			</ul>
+		</div>
+		<div id="main_div"
+			class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1"
+			style="padding-top: 50px; text-align: center;">
+			<div class="cmn-t-border">
+				<div class="white_box white_box_height">
+					<form data-ng-submit="addLeaves()" name="leavePolicy" novalidate>
+						<div class="col-lg-10 col-lg-offset-1">
+							<!-- 	<form data-ng-submit="addLeaves()" name="leavePolicy" novalidate> -->
+							<div class="row" style="margin-top: 1%; margin-bottom: 1%;">
+								<div class="col-lg-6">
+									<h3 id="events-editor">
+										<span class="pull-left"
+											style="font-family: 'Lato', Arial, sans-serif !important;">Manage
+											Leaves</span>
+									</h3>
+								</div>
+								<div class="col-lg-6">
+									<button class="btn btn-primary pull-right"
+										data-ng-click="addMore()">Add new</button>
+									<div class="clearfix">
+										<div data-year-drop style="float: left;">
+											Year: <select data-ng-model="year"
+												data-ng-options="y for y in years" name="year" required></select>
+											<span class="error"
+												data-ng-show="submitted && leavePolicy.year.$error.required">Required
+												!</span>
+										</div>
+										Full/Partial :<select data-ng-model="leavesType"
+											name="leavesType" required>
+											<option data-ng-selected="true" value="">--select
+												leaves type--</option>
+											<option value="full">Full</option>
+											<option value="partial">Partial</option>
+										</select> <span class="error"
+											data-ng-show="submitted && leavePolicy.leavesType.$error.required">Required
+											!</span>
+									</div>
+								</div>
+
+							</div>
+							<div class="form-group">
+								<table class="table table-bordered">
+
+									<thead>
+										<tr>
+											<th>Leave Type</th>
+											<th>Total Leaves</th>
+											<th>Remove</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr data-ng-repeat="type in types | orderBy:'$index':true">
+											<td><input type="text" ng-model="type.leaveType"
+												name="leaveType_{{$index}}" required> <span
+												class="error"
+												ng-show="submitted && leavePolicy.leaveType_{{$index}}.$error.required">Type
+													is required.</span></td>
+
+											<td>
+												<p class="input-group" style="max-width: 100%">
+													<input type="number" name="totalLeaves_{{$index}}"
+														ng-model="type.totalLeaves" required> <span
+														class="error"
+														ng-show="submitted && leavePolicy.totalLeaves_{{$index}}.$error.required">
+														Required!</span> <span class="error"
+														ng-show="leavePolicy.totalLeaves_{{$index}}.$error.number">
+														Not valid number!</span>
+												</p>
+											</td>
+											<td><button class="btn btn-danger"
+													data-ng-click="remove($index)" type="button">Delete</button></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+						</div>
+						<div class="col-lg-10 col-lg-offset-1">
+							<div class="row" style="margin-top: 1%; margin-bottom: 1%;">
+								<div class="col-lg-6"></div>
+								<div class="col-lg-6">
+									<input type="submit" value="Submit"
+										class="btn btn-primary pull-right"
+										data-ng-click="submitted=true">
+								</div>
+							</div>
+						</div>
+
+						<!-- <div class="row" style="margin-top: 1%; margin-bottom: 1%;">
+							<div class="col-lg-12">
+								<input type="submit" value="Submit" class="btn btn-primary pull-right" ng-click="submitted=true">
+								<div class="clearfix"></div>
+							</div>
+
+						</div> -->
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

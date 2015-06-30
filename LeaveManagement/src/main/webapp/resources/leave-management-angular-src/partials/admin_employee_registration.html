@@ -1,0 +1,205 @@
+<!-- <div>
+	<div style="text-align: center; padding: 20px;">
+		<form data-ng-submit="register(employee,employeeForm.$valid)" name="employeeForm" novalidate>
+			<label>First Name : </label> <input name="firstName" type="text" data-ng-model="employee.firstName" required>
+			<br> <span data-ng-show="submitted && employeeForm.firstName.$error.required">*required</span> <br>
+			<label>Middle Name : </label>
+			<input type="text" style="margin-bottom: 5px; margin-top: 18px;" name="middleName" data-ng-model="employee.middleName"><br>
+			<label>Last Name :</label> <input type="text" data-ng-model="employee.lastName"><br> 
+			<label>Gender :</label><input type="radio" name="employeeGender" value="Male" data-ng-model="employee.gender" required>Male &nbsp;
+			<input type="radio" name="employeeGender" value="Female" data-ng-model="employee.gender" required>Female <br>
+			<span data-ng-show="submitted && employeeForm.employeeGender.$error.required">*required</span><br>
+			<label>Joining Date : </label> <input type="text" style="margin-bottom: 5px; margin-top: 18px;"
+				name="employeeEmail" data-ng-model="employee.joiningDate" required><br> <span
+				data-ng-show="submitted && employeeForm.employeeEmail.$error.required">*required</span>
+			<label>Email : </label> <input type="email"
+				name="employeeEmail" data-ng-model="employee.email" required><br> <span
+				data-ng-show="submitted && employeeForm.employeeEmail.$error.required">*required</span>
+				<span data-ng-show="submitted && employeeForm.employeeEmail.$error.email">*Please enter Valid email format</span>
+				<br> <label>Department : </label> <select
+				data-ng-options="item as item for item in department track by item" data-ng-model="employee.department"></select><br>
+				<label>Designation : </label> <select
+				data-ng-options="item as item for item in department track by item" data-ng-model="employee.designation"></select><br>
+			<input type="submit" data-ng-click="submitted=true" value="Submit">
+		</form>
+	</div>
+</div> -->
+
+<div class="container-fluid">
+	<script type="text/ng-template" id="customTemplate.html">
+  <a>
+      <img ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/{{match.model.flag}}" width="16">
+      <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+  </a>
+</script>
+
+	<div class="row form_row_padding">
+		<div id="large_menu" data-ng-class="{'div-animate': toggleSideMenu}"
+			class="col-lg-2 col-lg-offset-3 col-md-3 col-sm-3 menu_back"
+			style="paddin: 0;">
+			<ul class="menu_large">
+				<li><a href="#about" class="gn-icon gn-icon-download">About</a></li>
+				<li><a href="#service" class="gn-icon gn-icon-cog">Service</a></li>
+				<li><a href="#works" class="gn-icon gn-icon-help">Works</a></li>
+				<li><a href="#contact" class="gn-icon gn-icon-archive">Contact</a></li>
+			</ul>
+		</div>
+		<div id="main_div"
+			class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1"
+			style="padding-top: 30px;">
+			<div class="cmn-t-border">
+				<div class="white_box" style="height: auto; padding: 10px;">
+					<form data-ng-submit="register(employee,employeeForm.$valid)"
+						name="employeeForm" novalidate>
+
+						<fieldset class="scheduler-border" style="border: 1px solid red;">
+							<legend class="scheduler-border">Register New Employee</legend>
+							<div class="row form_row_padding">
+								<div class="col-lg-2 col-lg-offset-3">
+									<label>First Name : </label><br> <span class="red"
+										data-ng-show="submitted && employeeForm.firstName.$error.required">*required</span>
+								</div>
+								<div class="col-lg-4">
+									<input name="firstName" class="form-control" type="text"
+										data-ng-model="employee.firstName" required>
+								</div>
+							</div>
+							<div class="row form_row_padding">
+								<div class="col-lg-2 col-lg-offset-3">
+									<label>Middle Name : </label><br>
+								</div>
+								<div class="col-lg-4">
+									<input type="text" class="form-control" name="middleName"
+										data-ng-model="employee.middleName">
+								</div>
+							</div>
+							<div class="row form_row_padding">
+								<div class="col-lg-2 col-lg-offset-3">
+									<label>Last Name : </label><br>
+								</div>
+								<div class="col-lg-4">
+									<input type="text" class="form-control" name="lastName"
+										data-ng-model="employee.lastName">
+								</div>
+							</div>
+							<div class="row form_row_padding">
+								<div class="col-lg-2 col-lg-offset-3">
+									<label>Gender :</label><br> <span
+										data-ng-show="submitted && employeeForm.employeeGender.$error.required">*required</span>
+								</div>
+								<div class="col-lg-4">
+									<input type="radio" name="employeeGender" value="Male"
+										data-ng-model="employee.gender" required>Male &nbsp; <input
+										type="radio" name="employeeGender" value="Female"
+										data-ng-model="employee.gender" required>Female
+								</div>
+
+							</div>
+
+							<div class="row form_row_padding">
+								<div class="col-lg-2 col-lg-offset-3">
+									<label>Joining Date : </label><br> <span
+										data-ng-show="submitted && employeeForm.employeeEmail.$error.required">*required</span>
+								</div>
+								<div class="col-lg-4">
+									<input type="text" class="form-control" name="employeeEmail"
+										data-ng-model="employee.joiningDate" required>
+								</div>
+
+							</div>
+							<div class="row form_row_padding">
+								<div class="col-lg-2 col-lg-offset-3">
+									<label>Email : </label> <br> <span
+										data-ng-show="submitted && employeeForm.employeeEmail.$error.required">*required</span>
+									<span
+										data-ng-show="submitted && employeeForm.employeeEmail.$error.email">*Please
+										enter Valid email format</span>
+								</div>
+								<div class="col-lg-4">
+									<input type="email" class="form-control" name="employeeEmail"
+										data-ng-model="employee.email" required>
+								</div>
+
+							</div>
+							<div class="row form_row_padding">
+								<div class="col-lg-2 col-lg-offset-3">
+									<label>Department : </label><br>
+								</div>
+								<div class="col-lg-4">
+									<!-- <select class="form-control"  data-ng-options="item as item for item in department track by item" data-ng-model="employee.department"></select> -->
+									<select class="form-control" name="deptName"
+										data-ng-model="employee.departmentId"
+										data-ng-options="deptNamee.id as deptNamee.departmentName for deptNamee in departmentName"
+										required>
+										<option value=''>Choose Department Name</option>
+									</select> <br>
+								</div>
+
+							</div>
+
+							<div class="row form_row_padding">
+								<div class="col-lg-2 col-lg-offset-3">
+									<label>Sub Department : </label><br>
+								</div>
+								<div class="col-lg-4">
+									<!-- <select class="form-control"
+										data-ng-options="item as item for item in department track by item"
+										data-ng-model="employee.subDepartment"></select> -->
+									<select class="form-control" name="subDeptName"
+										data-ng-model="employee.subDepartmentId"
+										data-ng-options="deptNamee.id as deptNamee.subDepartmentName for deptNamee in subDepartmentName"
+										required>
+										<option value=''>Choose Sub Department</option>
+									</select> <br> <br>
+								</div>
+
+							</div>
+
+							<div class="row form_row_padding">
+								<div class="col-lg-2 col-lg-offset-3">
+									<label>Group : </label>
+								</div>
+								<div class="col-lg-4">
+									<!-- <select class="form-control"
+										data-ng-options="item as item for item in department track by item"
+										data-ng-model="employee.group"></select> -->
+									<select class="form-control" name="groupName"
+										data-ng-model="employee.groupId"
+										data-ng-options="deptNamee.id as deptNamee.groupName for deptNamee in subGroupName"
+										required>
+										<option value=''>Choose Group Name</option>
+									</select><br>
+								</div>
+
+							</div>
+
+							<div class="row form_row_padding">
+								<div class="col-lg-2 col-lg-offset-3">
+									<label>Designation : </label>
+								</div>
+								<div class="col-lg-4">
+									<select class="form-control"
+										data-ng-options="item as item for item in department track by item"
+										data-ng-model="employee.designation"></select>
+								</div>
+
+							</div>
+
+
+						</fieldset>
+						<fieldset class="scheduler-border" style="border: 1px solid red;">
+							<legend class="scheduler-border">Submit Form</legend>
+							<div class="row" style="margin: 0px;">
+								<div class="col-lg-9">
+									<span class="action_button_left_margin_register_employee_page"><button
+											style="margin-right: 5px;" value="Submit"
+											data-ng-click="submitted = true;" class="btn btn-primary"
+											type="submit">Submit</button>
+										<button class="btn btn-primary pull-right" type="button">Cancel</button></span>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>

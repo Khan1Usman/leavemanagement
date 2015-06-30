@@ -1,0 +1,102 @@
+<div class="container-fluid">
+	<script type="text/ng-template" id="customTemplate.html">
+  <a>
+      <img ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/{{match.model.flag}}" width="16">
+      <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+  </a>
+</script>
+
+	<div class="row">
+		<div id="large_menu" data-ng-class="{'div-animate': toggleSideMenu}" class="col-lg-2 col-md-3 col-sm-3 menu_back"
+			style="paddin: 0;">
+			<ul class="menu_large">
+				<li><a href="#about" class="gn-icon gn-icon-download">About</a></li>
+				<li><a href="#service" class="gn-icon gn-icon-cog">Service</a></li>
+				<li><a href="#works" class="gn-icon gn-icon-help">Works</a></li>
+				<li><a href="#contact" class="gn-icon gn-icon-archive">Contact</a></li>
+			</ul>
+		</div>
+		<div id="main_div" class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1"
+			style="padding-top: 30px;">
+			<div class="cmn-t-border">
+				<div class="white_box" style="height: auto; padding: 10px;">
+					<form name="subDepartmentSetupForm" data-ng-submit="storeSubDepartments(subDepartments,subDepartmentSetupForm.$valid)"
+						novalidate>
+						<fieldset class="scheduler-border" style="border: 1px solid red;">
+							<legend class="scheduler-border">Setup Sub Departments</legend>
+							<div class="row department_name">
+								<div>Department Name - Production {{departmentName}}</div>
+							</div>
+							<div data-ng-repeat="subDepartment in subDepartments track by $index">
+								<div class="row" style="padding: 10px;">
+									<div class="form-group">
+										<!-- <label class="col-lg-1 col-md-1 col-sm-1 col-xs-1 control-label">DepartMent</label> -->
+										<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+										<label> Sub Department Name</label>
+											<input type="text" class="form-control" dynamic-name-prefix="dName" dynamic-name='$index'
+												placeholder="Sub Department Name" data-ng-model="subDepartment.subDepartmentName" required /> <span class="red"
+												data-ng-show="submitted && subDepartmentSetupForm.dName{{$index}}.$error.required">*Required </span>
+										</div>
+
+										<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+										<label> Sub Department Head</label>
+											<input type="text" class="form-control" dynamic-name-prefix="dHead" dynamic-name='$index'
+												placeholder="Department Head" typeahead-append-to-body="true" data-ng-model="subDepartment.managerName"
+												data-ng-change="getDepartMentHeads(subDepartment.managerName)"
+												typeahead="head.name as head.name for head in headsNameList | filter:{name:$viewValue}"
+												typeahead-loading="loadingLocations" typeahead-template-url="customTemplate.html"
+												typeahead-on-select='onSelect($item, $model, $label,$index)' typeahead-wait-ms="30" /> <span class="red"
+												data-ng-show="submitted &&  subDepartmentSetupForm.dHead{{$index}}.$error.required">*Required </span>
+
+										</div>
+										<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+										<label> Leave Head</label>
+											<input type="text" class="form-control" dynamic-name-prefix="dLHead" dynamic-name='$index'
+												placeholder="Leave  Head" typeahead-append-to-body="true" data-ng-model="subDepartment.leaveHeadName"
+												data-ng-change="getDepartMentHeads(subDepartment.leaveHeadName)"
+												typeahead="head.name as head.name for head in headsNameList | filter:{name:$viewValue}"
+												typeahead-loading="loadingLocations" typeahead-template-url="customTemplate.html"
+												typeahead-on-select='onSelect($item, $model, $label,$index)' typeahead-wait-ms="30" /> <span class="red"
+												data-ng-show="submitted &&  subDepartmentSetupForm.dHead{{$index}}.$error.required">*Required </span>
+
+										</div>
+										<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+										<label> Description</label>
+											<textarea class="form-control" placeholder="Description" data-ng-model="subDepartment.description"></textarea>
+										</div>
+										<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+										<br>
+											<button data-ng-show="$index==0" type="button" class="btn btn-default addButton"
+												data-ng-click="addNewSubDepartmentField()">
+												<i class="fa fa-plus"></i>
+											</button>
+											<button data-ng-show="$index>0" type="button" class="btn btn-default removeButton"
+												data-ng-click="removeSubDepartmentField()">
+												<i class="fa fa-minus"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+						<fieldset class="scheduler-border" style="border: 1px solid red;">
+							<legend class="scheduler-border">Submit Form</legend>
+							<div>
+								<div>
+									<span class="action_button_left_margin"><button style="margin-right: 5px;" value="Submit"
+											data-ng-click="submitted = true;" class="btn btn-primary" type="submit">Submit</button>
+										<button class="btn btn-primary pull-right" type="button">Cancel</button></span>
+								</div>
+
+								<!-- <div class="col-lg-11">
+								
+							</div>
+							<div class="col-lg-1">
+								
+							</div> -->
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>

@@ -1,0 +1,62 @@
+
+<div>
+	<div style="width: 314px; float: left;">
+		<div>
+			Selected year <input data-ng-model="year"
+				data-ng-click="dtflag=true;dt=null">
+		</div>
+		<div style="display: inline-block; min-height: 150px;"
+			data-ng-show="dtflag">
+			<a class="close" data-ng-click="dtflag=false">×</a>
+			<datepicker ng-model="dt" min-mode="year" datepicker-mode="'year'"
+				ng-click="print(dt)"></datepicker>
+		</div>
+	</div>
+	<div style="float: left; width: 800px; margin: -1px 0 0 49px;">
+		<form>
+			<div class="form-group">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Type</th>
+							<th>Total Leave</th>
+							<th data-ng-show="year=={{currentdate.now() | date:'yyyy'}}">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="leavePolicy in leavePolicys track by $index">
+							<!-- <td><input type="text" class="form-control" ng-model="event.title"><input type="hidden"
+												data-ng-model="event.type" data-ng-value="'important'"></td> -->
+							<td>
+								<p class="input-group" style="max-width: 100%">
+									<input type="text" class="form-control"
+										ng-model="leavePolicy.leaveName"
+										ng-readonly="disable[{{$index}}]" />
+							</td>
+							<td>
+								<p class="input-group" style="max-width: 100%">
+									<input type="text" class="form-control"
+										ng-readonly="disable[{{$index}}]"
+										ng-model="leavePolicy.totalLeave" close-text="Close" />
+							</td>
+							<td data-ng-show="year=={{currentdate.now() | date:'yyyy'}}">
+								<button class="btn btn-danger"
+									data-ng-click="deleteLeaveType(leavePolicy.id,$index)"
+									data-ng-show="disable[{{$index}}]">Delete</button>
+								<button class="btn btn-danger"
+									data-ng-click="editLeaveType(leavePolicy.id,$index)"
+									data-ng-show="disable[{{$index}}]">Edit</button>
+								<button class="btn btn-danger"
+									data-ng-show="!disable[{{$index}}]"
+									data-ng-click="revert($index)">Back</button>
+								<button class="btn btn-danger"
+									data-ng-click="saveLeaveType(leavePolicy,$index)"
+									data-ng-show="!disable[{{$index}}]">Save</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</form>
+	</div>
+</div>

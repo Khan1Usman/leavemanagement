@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<context:property-placeholder location="classpath:*.properties" />
+	<context:annotation-config />
+	<context:component-scan base-package="com.agami.leavemanagement.*" />
+	<import resource="./appServlet/servlet-context.xml" />
+	<bean id="csrfTokenRepository"
+		class="org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository">
+		<property name="headerName" value="X-XSRF-TOKEN" />
+	</bean>
+	<bean id="authenticationHandller"
+		class="com.agami.leavemanagement.service.AuthenticationHandller">
+	</bean>
+
+	<security:http pattern="/successLogout" security="none" />
+	<security:http pattern="/forgetPassword" security="none" />
+	
+	<security:http pattern="/passwordRecovery" security="none" />
+	<security:http auto-config="true" use-expressions="true"
+		authentication-manager-ref="autManager">
+		<security:remember-me token-validity-seconds="1209600"
+			data-source-ref="dataSource" remember-me-parameter="remember-me"
+			user-service-ref="userDetailService" />
+		<!-- <security:custom-filter ref="sessionManagementFilter" before="SESSION_MANAGEMENT_FILTER"/> -->
+		<security:intercept-url pattern="/" access="permitAll" />
+
+		<security:form-login login-page="/"
+			login-processing-url="/login" username-parameter="username"
+			password-parameter="password" authentication-failure-url="/index?error=true"
+			authentication-success-handler-ref="authenticationHandller" always-use-default-target="false"
+			 />
+		<security:session-management
+			invalid-session-url="/invalidSession" >
+			<security:concurrency-control 
+				max-sessions="1" error-if-maximum-exceeded="true" expired-url="/exceededSession" />
+
+		</security:session-management>
+		<security:logout invalidate-session="true"
+			logout-success-url="/successLogout" delete-cookies="JSESSIONID"
+			logout-url="/logout" />
+		<security:access-denied-handler
+			error-page="/error" />
+		<security:csrf disabled="true" />
+
+	</security:http>
+
+	<security:authentication-manager id="autManager">
+		<security:authentication-provider
+			user-service-ref="userDetailService">
+			<security:password-encoder ref="encoder" />
+
+			<!-- <security:jdbc-user-service id="userService" data-source-ref="dataSource" 
+				users-by-username-query="select username,password,enabled from users where 
+				username=?" authorities-by-username-query="select username,authority from 
+				Authorities where username=?" /> -->
+		</security:authentication-provider>
+	</security:authentication-manager>
+	<bean id="sessionManagementFilter"
+		class="org.springframework.security.web.session.SessionManagementFilter">
+		<constructor-arg name="securityContextRepository" ref="securityContextRepository" />
+		<property name="invalidSessionStrategy" ref="sessionFilter" />
+	</bean>
+	<bean id="securityContextRepository"
+		class="org.springframework.security.web.context.HttpSessionSecurityContextRepository" />
+	<bean id="encoder"
+		class="org.springframework.security.crypto.password.StandardPasswordEncoder" />
+
+</beans>

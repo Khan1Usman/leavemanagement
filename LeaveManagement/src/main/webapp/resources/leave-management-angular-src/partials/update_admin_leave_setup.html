@@ -1,0 +1,114 @@
+<style>
+.ng-touched.ng-invalid-required {
+	border-color: red;
+}
+/* Show red border when stuff has been typed in, but its invalid */
+.ng-dirty.ng-invalid {
+	border-color: red;
+}
+/*Show normal border color when typed in for the first time*/
+.ng-untouched.ng-invalid {
+	border-color: #ccc;
+}
+
+.ng-submitted input.ng-invalid {
+	border-color: red;
+}
+.ng-submitted select>option.ng.required{
+	border: 1px solid red;
+}
+
+.submitted .ng-invalid {
+	border: 1px solid red;
+}
+</style>
+<div data-ng-style="" class="modal-header model_border_radious">
+	<h5 class="modal-title wrap heading_bold">Update Manage Leaves
+		Setup</h5>
+</div>
+<div class="model-body">
+<div class="container-fluid">
+	<div class="row">
+
+		<div id="large_menu" data-ng-class="{'div-animate': toggleSideMenu}"
+			class="col-lg-2 col-md-3 col-sm-3 menu_back" style="paddin: 0;">
+			<ul class="menu_large">
+				<li><a href="#about" class="gn-icon gn-icon-download">About</a></li>
+				<li><a href="#service" class="gn-icon gn-icon-cog">Service</a></li>
+				<li><a href="#works" class="gn-icon gn-icon-help">Works</a></li>
+				<li><a href="#contact" class="gn-icon gn-icon-archive">Contact</a></li>
+			</ul>
+		</div>
+		<div id="main_div"
+			class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1"
+			style="padding-top: 50px; text-align: center;">
+			<div class="cmn-t-border">
+				<form name="updateupdateLeaveSetupForm" novalidate>
+					<div class="white_box white_box_height" style="width:450px;margin:0px 0px 0px -22px;">
+						<div class="col-lg-11 col-lg-offset-0">
+							<div class="row" style="margin-top: 1%; margin-bottom: 1%;">
+								<div class="col-lg-6">
+									<label>Leave Setup Year</label>
+									<select data-ng-model="updateLeaveData.leaveSetupYear" name="leaveSetupYear" style="margin: 16px 231px 5px 0px; padding: 5px; width: 201px;" required>
+											<option value="">..Choose leave Year</option>
+											<option data-ng-selected="{{leaveSetupYear == updateLeaveData.leaveSetupYear}}"
+												data-ng-repeat="leaveSetupYear in leaveYearList" value="{{leaveSetupYear}}">
+												{{leaveSetupYear}}</option>
+										</select>
+									<sup style="margin:19px -25px 4px -1px;" data-ng-show="submitted && updateLeaveSetupForm.leaveSetupYear.$error.required" class="red">Mandatory*</sup>
+								</div>
+							</div>
+							<div id="leaveSetup" class="form-group">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>Title</th>
+											<th>Starts at</th>
+											<th>Ends at</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><input type="text" class="form-control" name="title"
+												data-ng-model="updateLeaveData.title" placeholder="Title" required>
+												<input type="hidden" data-ng-model="updateLeaveData.type"
+												data-ng-value="'important'">
+												<label data-ng-show="submitted && updateLeaveSetupForm.title.$error.required " class="red"></label>
+												</td>
+											<td><input name="leaveStartDate"
+												style="margin: 5px;" type="text" class="form-control"
+												data-ng-model="updateLeaveData.startsAt"
+												date-picker-leavemanagement="2015"
+												placeholder="Leave Start Date" required />
+											<label data-ng-show="submitted && updateLeaveSetupForm.leaveStartDate.$error.required " class="red"></label>
+											</td>
+											
+											<td><input name="leaveEndDate"
+												style="margin: 5px;" type="text" class="form-control"
+												readonly data-ng-model="updateLeaveData.endsAt"
+												date-picker-leavemanagement placeholder="Leave Start Date"
+												required />
+												<label data-ng-show="submitted && updateLeaveSetupForm.leaveEnd.$error.required " class="red"></label>
+												</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div></div>
+<div class="modal-footer">
+	<button data-ng-style="" class="btn btn-primary refresh_btn"
+		data-ng-click="updateLeaveSetup(updateLeaveData, updateupdateLeaveSetupForm.$valid)">Update</button>
+	<button data-ng-style="" class="btn btn-primary refresh_btn"
+		data-ng-click="leaveUpadtePopupClose()">Cancel</button>
+</div>
+<div class="ngdialog-close fa fa-times fa-2x"
+	style="color: #fff; background: none !important;"></div>
+</div>

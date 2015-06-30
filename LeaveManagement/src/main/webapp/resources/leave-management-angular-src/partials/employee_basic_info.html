@@ -1,0 +1,802 @@
+<!-- <div data-ng-show="step == 1">
+		<label>Step one </label>
+		<form name="empBasicInfoForm"
+			data-ng-submit="nextStep(employee,empBasicInfoForm.$valid, $event)"
+			novalidate>
+			<div>
+				<label for="name">First Name</label> <input class="form-control"
+					name="firstName" name="firstName" type="text"
+					data-ng-model="employee.firstName" required /> <label
+					data-ng-show="submitted && empBasicInfoForm.firstName.$error.required"
+					class="red">Mandatory*</label><br>
+			</div>
+			<div>
+				<label for="name">Middle Name</label> <input class="form-control"
+					type="text" data-ng-model="employee.middleName" name="middleName" />
+			</div>
+			<div>
+				<label for="name">Last Name</label> <input class="form-control"
+					name="lastName" type="text" data-ng-model="employee.lastName" /> 
+			</div>
+			<div>
+				<label for="name">Email</label> <input class="form-control"
+					type="email" autocomplete="off" data-ng-model="employee.email"
+					name="mail" pattern="[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}"
+					data-ng-change="isUniqueEmail(employee.email)" required /> <label
+					data-ng-show="submitted && empBasicInfoForm.mail.$error.required"
+					class="red">Mandatory*</label><br> <label class="red"
+					data-ng-show="empBasicInfoForm.mail.$error.pattern">Please
+					Enter Valid Email</label> <label class="red"
+					data-ng-show="!empBasicInfoForm.mail.$error.required && !empBasicInfoForm.mail.$error.pattern && isUnique">Email
+					Already Registered</label>
+			</div>
+			<div>
+				<label>Birth Date </label> <input type="text" name="birthDay"
+					placeholder="Birth Date" class="form-control"
+					data-ng-model="employee.birthDate" readonly
+					datepicker-for-birth-day required> <label
+					data-ng-show="submitted && empBasicInfoForm.birthDay.$error.required"
+					class="red">Mandatory*</label><br>
+			</div>
+			<div>
+				<label for="password">Password</label> <input type="password"
+					id="password" name="password" data-ng-model="employee.password"
+					data-ng-minlength="8" data-ng-maxlength="20" required /> <label
+					data-ng-show="submitted && empBasicInfoForm.password.$error.required"
+					class="red">Mandatory*</label><br> <span
+					data-ng-show="!empBasicInfoForm.password.$error.required && (empBasicInfoForm.password.$error.minlength || empBasicInfoForm.password.$error.maxlength) && empBasicInfoForm.password.$dirty">Passwords
+					must be between 8 and 20 characters.</span> <br />
+				<label
+					for="password_c">Confirm Password
+					{{empBasicInfoForm.password_c.$error.noMatch}}
+					{{empBasicInfoForm.password_c.$error.required}}</label> <input
+					type="password" id="password_c" name="password_c"
+					data-ng-model="employee.password_c" valid-password-c required /> <span
+					data-ng-show="!empBasicInfoForm.password_c.$error.required && empBasicInfoForm.password_c.$error.noMatch">Password
+					do not match.</span>
+
+			</div>
+			<div>
+				<label> Gender </label> <input type="radio" name="gender"
+					value="male" data-ng-model="employee.gender" required /> Male <input
+					type="radio" name="gender" value="female"
+					data-ng-model="employee.gender" required /> Female <label
+					data-ng-show="submitted && empBasicInfoForm.gender.$error.required"
+					class="red">Mandatory*</label><br>
+			</div>
+			<div>
+				<label for="name">Mobile</label> <input type='tel'
+					pattern="[0-9]{10,10}" name="mob" class="search"
+					data-ng-model="employee.mobileNumber" autocomplete="off"
+					maxlength="10" data-ng-blur="isUniqueMobile(employee.mobileNumber)"
+					required> <label
+					data-ng-show="submitted && empBasicInfoForm.mob.$error.required"
+					class="red">Mandatory*</label> <label class="red"
+					data-ng-show="empBasicInfoForm.mob.$error.pattern">Please
+					Enter Valid mobile</label> <br> <label class="red"
+					data-ng-show="!empBasicInfoForm.mobileNumber.$error.required && !empBasicInfoForm.mobileNumber.$error.pattern && isUniqueMob">Mobile
+					Already Registered</label>
+			</div>
+			<button class="btn btn-primary" data-ng-click="submitted=true">Next
+				step</button>
+		</form>
+
+	</div>
+	<div data-ng-show="step == 2">
+		<form name="empAddressDetails"
+			data-ng-submit="nextStep(employee, empAddressDetails.$valid, $event)" novalidate>
+			<label>Step two</label>
+			<div class="form-group">
+				<label for="address">Permanent Address</label>
+				<textarea data-ng-model="employee.parmanentAddress" name="p_address"
+					rows="8" cols="10">
+			</textarea>
+			</div>
+			<div class="form-group">
+				<label for="address">Local Address</label>
+				<textarea data-ng-model="employee.localAddress" name="l_address"
+					rows="8" cols="10">
+			</textarea>
+			</div>
+			<div>
+				<label for="altEmail">Alternate Email</label> <input
+					class="form-control" type="email" autocomplete="off"
+					data-ng-model="employee.alternetEmail" name="altEmail" pattern ="[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}"/>
+					<label class="red" data-ng-show="empAddressDetails.altEmail.$error.pattern">Please Enter Valid Email</label>
+				<br>
+			</div>
+			<div>
+				<label for="mob">Mobile</label> <input type='tel'
+					pattern="[0-9]{10,10}" name="altMob" class="search"
+					data-ng-model="employee.alternateMobile" autocomplete="off"
+					maxlength="10">
+					<label class="red" data-ng-show="empAddressDetails.altMob.$error.pattern">Please Enter Valid Number</label>
+			</div>
+			<button class="btn btn-default" data-ng-click="prevStep($event)">Previous step</button>
+			<button class="btn btn-primary" data-ng-click="submitted=true">Next step</button>
+		</form>
+
+	</div>
+	<div data-ng-show="step == 3">{{errorObject.boardNameError}}
+		<form name="empEduDetails"
+			data-ng-submit="nextStepForm(employee,empEduDetails.$valid ,$event)" novalidate>
+			<label>Step three</label>
+			<div class="form-group" data-ng-repeat="secondaryChoise in employee.secondaryInfo track by $index">
+				<div class="">
+				<label data-ng-show="secondaryChoise.secondaryName=='Secondary'">Secondary</label>
+				<label data-ng-show="secondaryChoise.secondaryName=='High Secondary'"> High Secondary</label>
+				<input type="text"	data-ng-model="secondaryChoise.boardName" name=""
+						placeholder="{{secondaryChoise.secondaryName}}"
+						typeahead="c as c for c in boardList  | filter:$viewValue | limitTo:10"
+						typeahead-min-length='1'
+						typeahead-on-select='onSelectPart($item, $model, $label,$index)'
+						data-ng-change="getBoardName(secondaryChoise.secondaryName)"
+						typeahead-template-url="customTemplate.html" class="form-control">
+				<label data-ng-show ="errorArray[$index].boardNameError">Please Enter Secondary Board Name</label> 
+				<label class="">Year</label> <select class="form-control"
+						data-ng-model="secondaryChoise.secondaryYear"
+						data-ng-options="secYear as secYear for secYear in yearList">
+						<option value="">-- Choose Year</option>
+				</select>
+				<label data-ng-show ="errorArray[$index].secYearError">Please Choose  Year</label> 
+				<label class="">Marks</label> <input class="form-control" name="percentageMarks{{$index}}"
+						type="text" data-ng-model="secondaryChoise.secondaryPercentage" placeholder="%" pattern="[0-9]{0,2}"/>
+				<label class="red" data-ng-show="empEduDetails.percentageMarks{{$index}}.$error.pattern">Please Enter Valid Marks</label>
+				<label data-ng-show ="errorArray[$index].secPercentageError">Please Enter Percentage</label> 
+			</div>
+			</div>
+			<div style="border: 1px solid red;"
+				data-ng-repeat="choice in employee.degreeInfo track by $index">
+				<select class="dropdown-menu" " data-ng-model="choice.degree">
+					<option value="">..Choose degree</option>
+					<option value="UG">UG</option>
+					<option value="PG">PG</option>
+				</select>
+				<label data-ng-show ="degreeErrorArray[$index].degreeError">Please select Degree</label>  
+				<input type="text" data-ng-model="choice.university" name=""
+					placeholder="Add University Name"
+					typeahead="c as c for c in universityList  | filter:$viewValue | limitTo:10"
+					typeahead-min-length='1'
+					typeahead-on-select='onSelectPart($item, $model, $label,$index)'
+					data-ng-change="getUniversityName(employee.universityName[$index])"
+					typeahead-template-url="customTemplate.html" class="form-control">
+				<label data-ng-show ="degreeErrorArray[$index].universityError">Please Enter university Name</label>  
+				<label>Year</label> <select class="dropdown-menu"
+					data-ng-model="choice.degreeYear"
+					data-ng-options="degreeYear as degreeYear for degreeYear in yearList">
+					<option value="">-- Choose Year</option>
+				</select>
+				<label data-ng-show ="degreeErrorArray[$index].degreeYearError">Please Select Year</label> 
+				<label class="">Marks</label> <input class="form-control" name="degreePercentage{{$index}}"
+					type="text" data-ng-model="choice.percentageMarks" placeholder="%"  pattern="[0-9]{0,2}" />
+				<label class="red" data-ng-show="empEduDetails.degreePercentage{{$index}}.$error.pattern">Please Enter Valid Marks</label>
+				<label data-ng-show ="degreeErrorArray[$index].percentageMarksError">Please Enter Marks</label> 
+				<button class="remove" data-ng-click="removeChoice($index, $event)">-</button>
+				<button data-ng-click="addNewChoice($event)">Add Degree</button>
+			</div>
+			<button class="btn btn-default" data-ng-click="prevStep($event)">Previous
+				step</button>
+			<button class="btn btn-primary" data-ng-click="submitted=true">Next step</button>
+		</form>
+	</div>
+	<div data-ng-show="step == 4">
+		<form name="empUploadPic"
+			data-ng-submit="submitForm(employee,empUploadPic.$valid)" novalidate>
+			<label>Step three</label>
+			<div class="form-group">
+				<div>
+					<img data-ng-if="!loading" class="thumb"  
+						data-ng-src="{{stepsModel}}" />
+				</div>
+				<input type='file'
+					onchange="angular.element(this).scope().imageUpload(this)"
+					data-ngf-accept="image/*" />
+				<p data-ng-show="loading">...LOADING...</p>
+				<p data-ng-hide="loading">{{status}}</p>
+			</div>
+			<div>
+				Select an image file: <input type="file" id="fileInput" />
+			</div>
+			<div class="">
+				<img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+			</div>
+			<div>
+				<label>Security Question</label> <select class="dropdown-menu"
+					name="question" data-ng-model="employee.securityQuestion"
+					data-ng-options="securityQuestion as securityQuestion for securityQuestion in questionList"
+					required>
+					<option value="">-- Choose Security Question</option>
+				</select> <label
+					data-ng-show="submitted && empUploadPic.question.$error.required">Mandatory*</label><br>
+				<label class="">Answer</label> <input type="text" name="answer"
+					data-ng-model="employee.answer" placeholder="Answer" required /> <label
+					data-ng-show="submitted && empUploadPic.answer.$error.required">Mandatory*</label><br>
+			</div>
+			<button class="btn btn-default" data-ng-click="prevStep($event)">Previous
+				step</button>
+			<button class="btn btn-default" data-ng-click="submitted=true">Update</button>
+		</form>
+
+		<button type="submit">submit </button>
+	</div> -->
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Leave Management {{step}}</title>
+
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+<!-- Fonts -->
+<link href="font-awesome/css/font-awesome.css" rel="stylesheet"
+	type="text/css">
+<link href="css/nivo-lightbox.css" rel="stylesheet" />
+<link href="css/nivo-lightbox-theme/default/default.css"
+	rel="stylesheet" type="text/css" />
+<link href="css/animate.css" rel="stylesheet" />
+<!-- Squad theme CSS -->
+<link href="css/style.css" rel="stylesheet">
+</head>
+<script type="text/ng-template" id="customTemplate.html">
+  <a>
+      <img ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/{{match.model.flag}}" width="16">
+      <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+  </a>
+</script>
+<style>
+.ng-touched.ng-invalid-required {
+	border-color: red;
+}
+/* Show red border when stuff has been typed in, but its invalid */
+.ng-dirty.ng-invalid {
+	border-color: red;
+}
+/*Show normal border color when typed in for the first time*/
+.ng-untouched.ng-invalid {
+	border-color: #ccc;
+}
+
+.ng-submitted input.ng-invalid {
+	border-color: red;
+}
+
+.submitted .ng-invalid {
+	border: 1px solid red;
+}
+</style>
+<body data-spy="scroll">
+
+	<div class="container">
+		<ul id="gn-menu" class="gn-menu-main">
+			<li class="gn-trigger" style="display: none;"><a
+				class="gn-icon gn-icon-menu"><span>Menu</span></a>
+				<nav class="gn-menu-wrapper">
+					<div class="gn-scroller">
+						<ul class="gn-menu">
+							<li class="gn-search-item"><input placeholder="Search"
+								type="search" class="gn-search"> <a
+								class="gn-icon gn-icon-search"><span>Search</span></a></li>
+							<li><a href="#about" class="gn-icon gn-icon-download">About</a>
+							</li>
+							<li><a href="#service" class="gn-icon gn-icon-cog">Service</a></li>
+							<li><a href="#works" class="gn-icon gn-icon-help">Works</a></li>
+							<li><a href="#contact" class="gn-icon gn-icon-archive">Contact</a>
+							</li>
+						</ul>
+					</div>
+					<!-- /gn-scroller -->
+				</nav></li>
+			<li id="long_menu" onclick="hide_show_longmenu();"><a
+				class="gn-icon gn-icon-menu gn-selected"><span>Menu</span></a></li>
+			<li><a href="index.html">Leave Management</a></li>
+			<li>
+				<ul class="company-social">
+					<li class="social-facebook"><a href="#" target="_blank"><i
+							class="fa fa-bell-o"></i></a></li>
+					<li class="social-twitter"><a href="#" target="_blank"><i
+							class="fa fa-cog"></i></a></li>
+					<li class="social-dribble"><a href="#" target="_blank"><i
+							class="fa fa-dribbble"></i></a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+
+
+
+
+	<div class="container-fluid ">
+		<div class="row">
+
+			<div id="large_menu" class="col-lg-2 col-md-3 col-sm-3 menu_back"
+				style="paddin: 0;">
+				<ul class="menu_large">
+					<li><a href="#about" class="gn-icon gn-icon-download">About</a>
+					</li>
+					<li><a href="#service" class="gn-icon gn-icon-cog">Service</a></li>
+					<li><a href="#works" class="gn-icon gn-icon-help">Works</a></li>
+					<li><a href="#contact" class="gn-icon gn-icon-archive">Contact</a>
+					</li>
+				</ul>
+			</div>
+			<div id="main_div1"
+				class="padding_top_100 col-lg-6 col-md-7 col-sm-8 col-lg-offset-3 col-md-offset-3 col-sm-offset-2">
+				<div class="white_box">
+					<div class="row">
+						<div class="name_head" style="font-size: 30px;">
+							<a href="#"> 1, Basic Info</a>
+						</div>
+					</div>
+					<div>
+						<div class="row">
+							<div class="board">
+								<div class="board-inner">
+									<ul class="nav nav-tabs" id="myTab">
+										<div class="liner"></div>
+										<li data-ng-class="step==1 ? 'active' : 'media_style'"><a
+											href="" data-ng-click="checkStepValue(1, step)" 
+											title="welcome"> <span class="round-tabs one">
+													<div class="media_user_icon"></div> <!-- <i class="glyphicon glyphicon-user"></i> -->
+											</span>
+										</a></li>
+
+										<li data-ng-class="step==2 ? 'active' : 'media_style'"><a
+											href="" data-ng-click="checkStepValue(2, step)" 
+											title="profile"> <span class="round-tabs two"
+												style="height: 50px; top: 10px; width: 50px;">
+													<div class="glyphicon glyphicon-home"></div> <!-- <i class="glyphicon glyphicon-home media_home" style="top:-9px;"></i> -->
+											</span>
+										</a></li>
+										<li data-ng-class="step==3 ? 'active' : 'media_style'"><a
+											href="" data-ng-click="checkStepValue(3, step)" 
+											title="bootsnipp goodies"> <span class="round-tabs three"
+												style="height: 50px; top: 10px; width: 50px;"> <!-- <i class="glyphicon glyphicon-gift media_home" style="top:-9px;"></i> -->
+													<div class="media_education_icon1"></div>
+											</span>
+										</a></li>
+
+										<li data-ng-class="step==4 ? 'active' : 'media_style'"><a
+											href="" data-ng-click="checkStepValue(4, step)" 
+											title="blah blah"> <span class="round-tabs four"
+												style="height: 50px; top: 10px; width: 50px;"> <!-- <i class="glyphicon glyphicon-camera media_home" style="top:-9px;"></i> -->
+													<div class="media_profile_icon"></div>
+											</span>
+										</a></li>
+
+									</ul>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-10 col-lg-offset-1" data-ng-show="step == 1">
+						<form name="empBasicInfoForm"
+							data-ng-submit="nextStep(employee,empBasicInfoForm.$valid, $event)"
+							novalidate>
+							<div class="form-group">
+								<input class="width101" name="firstName" name="firstName"
+									type="text" placeholder="First Name"
+									data-ng-model="employee.firstName" required />
+								<!-- <label
+									data-ng-show="submitted && empBasicInfoForm.firstName.$error.required"
+									class="red">Mandatory*</label> -->
+							</div>
+							<div class="form-group">
+								<input class="width101" class="form-control" type="text"
+									placeholder="Middle Name" data-ng-model="employee.middleName"
+									name="middleName" />
+							</div>
+							<div class="form-group">
+								<input class="width101" placeholder="Last Name" name="lastName"
+									type="text" data-ng-model="employee.lastName" />
+							</div>
+							<div class="form-group">
+								<input class="width101" placeholder="Email" type="email"
+									autocomplete="off" data-ng-model="employee.email" name="mail"
+									pattern="[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}"
+									data-ng-change="isUniqueEmail(employee.email)" required />
+								<!-- <label
+									data-ng-show="submitted && empBasicInfoForm.mail.$error.required"
+									class="red">Mandatory*</label><br> -->
+								<label class="red"
+									data-ng-show="empBasicInfoForm.mail.$error.pattern">Please
+									Enter Valid Email</label> <label class="red"
+									data-ng-show="!empBasicInfoForm.mail.$error.required && !empBasicInfoForm.mail.$error.pattern && isUnique">Email
+									Already Registered</label>
+							</div>
+							<div class="form-group">
+								<!-- <input type="text" name="birthDay" placeholder="Date Of Birth"
+									class="width101" data-ng-model="employee.birthDate" readonly
+									datepicker-for-birth-day required> <label
+									data-ng-show="submitted && empBasicInfoForm.birthDay.$error.required"
+									class="red">Mandatory*</label><br> -->
+								<select class="width100" name="birthdayMonth"
+									data-ng-model="employee.birthdayMonth" required>
+									<option value="">Month</option>
+									<option value="01">Jan</option>
+									<option value="02">Feb</option>
+									<option value="03">Mar</option>
+									<option value="04">Apr</option>
+									<option value="05">May</option>
+									<option value="06">Jun</option>
+									<option value="07">Jul</option>
+									<option value="08">Aug</option>
+									<option value="09">Sep</option>
+									<option value="10">Oct</option>
+									<option value="11">Nov</option>
+									<option value="12">Dec</option>
+								</select> <label
+									data-ng-show="submitted && empBasicInfoForm.birthdayMonth.$error.required"
+									class="red"></label> <select name="birthDay"
+									data-ng-model="employee.birthDay" required>
+									<option value="">Day</option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+									<option>6</option>
+									<option>7</option>
+									<option>8</option>
+									<option>9</option>
+									<option>10</option>
+									<option>11</option>
+									<option>12</option>
+									<option>13</option>
+									<option>14</option>
+									<option>15</option>
+									<option>16</option>
+									<option>17</option>
+									<option>18</option>
+									<option>19</option>
+									<option>20</option>
+									<option>21</option>
+									<option>22</option>
+									<option>23</option>
+									<option>24</option>
+									<option>25</option>
+									<option>26</option>
+									<option>27</option>
+									<option>28</option>
+									<option
+										data-ng-show="employee.birthdayMonth != 2 || !(employee.birthdayYear % 4)">29</option>
+									<option data-ng-show="employee.birthdayMonth != 2">30</option>
+									<option
+										data-ng-show="employee.birthdayMonth == 1 || employee.birthdayMonth == 3 || employee.birthdayMonth == 5 || employee.birthdayMonth == 7 || 
+          employee.birthdayMonth == 8 || employee.birthdayMonth == 10 || employee.birthdayMonth == 12">
+										31</option>
+								</select> <label
+									data-ng-show="submitted && empBasicInfoForm.birthDay.$error.required"
+									class="red"></label> <label data-ng-show="isValidDay">Date
+									Not Valid </label> <select class="width100"
+									data-ng-model="employee.birthdayYear" name="birthdayYear"
+									data-ng-options="birthdayYear as birthdayYear for birthdayYear in yearList"
+									required>
+									<option value="">Year</option>
+								</select> <label
+									data-ng-show="submitted && empBasicInfoForm.birthdayYear.$error.required"
+									class="red"></label>
+							</div>
+							<div class="form-group">
+								Male&nbsp;&nbsp;&nbsp;<input type="radio" name="gender"
+									value="male" data-ng-model="employee.gender" required />&nbsp;&nbsp;&nbsp;Female
+								&nbsp;&nbsp;&nbsp; <input type="radio" name="gender"
+									value="female" data-ng-model="employee.gender" required /> <label
+									data-ng-show="submitted && empBasicInfoForm.gender.$error.required"
+									class="red">Mandatory*</label><br>
+							</div>
+							<!-- <div class="form-group">
+								<input type='tel' placeholder="Mobile Number"
+									pattern="[0-9]{10,10}" name="mob" class="width101"
+									data-ng-model="employee.mobileNumber" autocomplete="off"
+									maxlength="10"
+									data-ng-blur="isUniqueMobile(employee.mobileNumber)" required>
+								<label
+									data-ng-show="submitted && empBasicInfoForm.mob.$error.required"
+									class="red">Mandatory*</label> <label class="red"
+									data-ng-show="empBasicInfoForm.mob.$error.pattern">Please
+									Enter Valid mobile</label> <br> <label class="red"
+									data-ng-show="!empBasicInfoForm.mobileNumber.$error.required && !empBasicInfoForm.mobileNumber.$error.pattern && isUniqueMob">Mobile
+									Already Registered</label>
+							</div> -->
+							<div>
+								<nav style="text-align: center;">
+									<ul class="pager">
+										<!-- <li class="top5">
+											<div class="round">
+												<span class="glyphicon glyphicon-chevron-right size"
+													aria-hidden="true" data-ng-click="submitted=true"> </span>
+											</div>
+										</li> -->
+										<button data-ng-click="submitted=true">Next</button>
+										<!-- 									<li class="top5"><a href="#">Next</a></li>
+ -->
+									</ul>
+								</nav>
+							</div>
+						</form>
+					</div>
+					<div class="col-lg-10 col-lg-offset-1" data-ng-show="step == 2">
+						<form name="empAddressDetails"
+							data-ng-submit="nextStep(employee, empAddressDetails.$valid, $event)"
+							novalidate>
+							<div class="form-group">
+								<textarea class="form-control control1"
+									placeholder="Permanent Address"
+									data-ng-model="employee.parmanentAddress" rows="3"></textarea>
+							</div>
+
+							<div class="form-group">
+								<textarea class="form-control"
+									data-ng-model="employee.localAddress"
+									placeholder="Local Address" rows="3"></textarea>
+							</div>
+
+							<div class="form-group">
+								<input class="width101" type="email"
+									placeholder="Alternate Email" autocomplete="off"
+									data-ng-model="employee.alternetEmail" name="altEmail"
+									pattern="[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}" /> <label
+									class="red"
+									data-ng-show="empAddressDetails.altEmail.$error.pattern">Please
+									Enter Valid Email</label> <br>
+							</div>
+
+							<div class="form-group">
+								<input type='tel' pattern="[0-9]{10,10}"
+									placeholder="Alternate Mobile No'" name="altMob"
+									class="width101" data-ng-model="employee.alternateMobile"
+									autocomplete="off" maxlength="10"> <label class="red"
+									data-ng-show="empAddressDetails.altMob.$error.pattern">Please
+									Enter Valid Number</label>
+							</div>
+
+							<nav style="text-align: center;">
+								<ul class="pager">
+									<!-- <li class="top5"><a href="#">Previous</a></li>
+									<li><a href="#">
+											<div class="round">
+												<span class="glyphicon glyphicon-chevron-left size"
+													aria-hidden="true"></span>
+											</div>
+									</a></li>
+									<li><a href="#">
+											<div class="round">
+												<span class="glyphicon glyphicon-chevron-right size"
+													aria-hidden="true"></span>
+											</div>
+									</a></li>
+									<li class="top5"><a href="#">Next</a></li> -->
+									<button class="" data-ng-click="prevStep($event)">Previous
+										step</button>
+									<button class="" data-ng-click="submitted=true">Next
+										step</button>
+
+								</ul>
+							</nav>
+						</form>
+					</div>
+					<div data-ng-show="step == 3" class="col-lg-10 col-lg-offset-1">
+						<form name="empEduDetails"
+							data-ng-submit="nextStepForm(employee,empEduDetails.$valid, true)"
+							novalidate>
+							<div
+								data-ng-repeat="secondaryChoise in employee.secondaryInfo track by $index">
+								<!-- <label
+										data-ng-show="secondaryChoise.secondaryName=='Secondary'">Secondary</label>
+									<label
+										data-ng-show="secondaryChoise.secondaryName=='High Secondary'">
+										High Secondary</label> -->
+								<div class="form-group col-lg-5" style="padding-left: 0;">
+									<input class="width101" type="text"
+										data-ng-model="secondaryChoise.boardName" name=""
+										placeholder="{{secondaryChoise.secondaryName}}"
+										typeahead="c as c for c in boardList  | filter:$viewValue | limitTo:10"
+										typeahead-min-length='1'
+										typeahead-on-select='onSelectPart($item, $model, $label,$index)'
+										data-ng-change="getBoardName(secondaryChoise.boardName)"
+										typeahead-template-url="customTemplate.html"
+										class="form-control"> <label
+										data-ng-show="errorArray[$index].boardNameError">Please
+										Enter Secondary Board Name</label>
+								</div>
+								<div class="form-group col-lg-4" style="padding-right: 0;">
+									<input class="width101" name="percentageMarks{{$index}}"
+										type="text"
+										data-ng-model="secondaryChoise.secondaryPercentage"
+										placeholder="Enter Marks(%)" pattern="[0-9]{1,2}(\.[0-9]+)?$" />
+									<label class="red"
+										data-ng-show="empEduDetails.percentageMarks{{$index}}.$error.pattern">Please
+										Enter Valid Marks</label> <label
+										data-ng-show="errorArray[$index].secPercentageError">Please
+										Enter Percentage</label>
+								</div>
+								<div class="form-group col-lg-3" style="padding-right: 0;">
+									<select class="width101"
+										data-ng-model="secondaryChoise.secondaryYear"
+										data-ng-options="secYear as secYear for secYear in yearList">
+										<option value="">Choose Year</option>
+									</select> <label data-ng-show="errorArray[$index].secYearError">Please
+										Choose Year</label>
+								</div>
+							</div>
+							<div
+								data-ng-repeat="choice in employee.degreeInfo track by $index"
+								class="form-group col-lg-14">
+								<div class="form-group col-lg-4" style="padding-left: 0;">
+									<select class="width101" data-ng-model="choice.degree">
+										<option value="">Choose Degree</option>
+										<option value="UG">UG</option>
+										<option value="PG">PG</option>
+									</select> <label data-ng-show="degreeErrorArray[$index].degreeError">Please
+										select Degree</label>
+								</div>
+								<div class="form-group col-lg-3" style="padding-right: 0;">
+									<input class="width101" type="text"
+										data-ng-model="choice.university" name=""
+										placeholder="Add University Name"
+										typeahead="c as c for c in universityList  | filter:$viewValue | limitTo:10"
+										typeahead-min-length='1'
+										typeahead-on-select='onSelectPart($item, $model, $label,$index)'
+										data-ng-change="getUniversityName(choice.university[$index])"
+										typeahead-template-url="customTemplate.html"
+										class="form-control"> <label
+										data-ng-show="degreeErrorArray[$index].universityError">Please
+										Enter university Name</label>
+								</div>
+								<div class="form-group col-lg-2" style="padding-right: 0;">
+									<input class="width101" name="degreePercentage{{$index}}"
+										type="text" data-ng-model="choice.percentageMarks"
+										placeholder="Enter Marks(%)" pattern="[0-9]{1,2}(\.[0-9]+)?$" />
+									<label class="red"
+										data-ng-show="empEduDetails.degreePercentage{{$index}}.$error.pattern">Please
+										Enter Valid Marks</label> <label
+										data-ng-show="degreeErrorArray[$index].percentageMarksError">Please
+										Enter Marks</label>
+								</div>
+								<div class="form-group col-lg-3" style="padding-right: 0;">
+									<select class="width101" data-ng-model="choice.degreeYear"
+										data-ng-options="degreeYear as degreeYear for degreeYear in yearList">
+										<option value="">Choose Year</option>
+									</select> <label data-ng-show="degreeErrorArray[$index].degreeYearError">Please
+										Select Year</label>
+								</div>
+								<div class="form-group col-lg-11" style="padding-left: 283;">
+									<button class="cancleDegree"
+										data-ng-click="removeChoice($index, $event)">X</button>
+									<button class="addDegree" data-ng-click="addNewChoice($event)">Add
+										Degree</button>
+								</div>
+							</div>
+							<button class="" data-ng-click="prevStep($event)">Previous
+								step</button>
+							<button class="" data-ng-click="submitted=true">Next
+								step</button>
+						</form>
+					</div>
+					<div data-ng-show="step == 4" class="col-lg-10 col-lg-offset-1">
+						<form name="empUploadPic"
+							data-ng-submit="submitForm(employee,empUploadPic.$valid)"
+							novalidate>
+							<!-- <div>
+								Select an image file: <input type="file" id="fileInput" />
+							</div>
+							<div class="">
+								<img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+							</div> -->
+							<div>
+								<div class="profile_img"
+									style="text-align: center; padding-top: 30px;"
+									data-ng-show="imgFlag">
+									<img data-ng-src="{{cropImage}}">
+								</div>
+								<div class="profile_img"
+									style="text-align: center; padding-top: 30px;"
+									data-ng-show="!imgFlag && myImage.length == ''">
+									<img src="./resources/assets/img/defult_profile_pic.png">
+									<!-- <img-crop image="myImage" result-image="myCroppedImage"></img-crop> -->
+								</div>
+								<div class="cropArea" style="text-align: center;"
+									data-ng-show="!imgFlag && myImage.length != ''">
+
+									<img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+								</div>
+								<div class="form-group" style="text-align: center;">
+									<input type="file" data-icon="false" class="filestyle"
+										id="filestyle-1"
+										style="clip: rect(0px, 0px, 0px, 0px); position: absolute;"
+										tabindex="-1">
+									<div class="bootstrap-filestyle input-group">
+										<span class="group-span-filestyle input-group-btn"
+											tabindex="0"> <label style="border-radius: 0;"
+											class="btn btn-default btn-danger btn-fill browse"
+											for="filestyle-1"> <label for="exampleInputFile"></label>
+												<span style="position: relative; font-size: 18px;">Browse</span>
+												<span class="plus_icon back_1">+</span> <!-- <div class="input-group-addon plus_icon">+</div> -->
+										</label>
+										</span>
+									</div>
+									<button data-ng-disabled="!buttonDisable"
+										class="btn btn-default" data-ng-click="imgCrop($event)">Crop</button>
+									{{imgFlag}}
+								</div>
+							</div>
+							<div class="form-group col-lg-4">
+								<!-- <label>Security Question</label> <select class="width101"
+									name="questions" data-ng-model="employee.securityQuestion"
+									data-ng-options="securityQuestion as securityQuestion for securityQuestion in questionList"
+									required>
+									<option value="">Choose Security Question</option>
+								</select> <label
+									data-ng-show="submitted && empUploadPic.questions.$error.required">Mandatory*</label><br>
+								<label class="">Answer</label> <input type="text" name="answers"
+									data-ng-model="employee.answer" placeholder="Answer" required />
+								<label
+									data-ng-show="submitted && empUploadPic.answers.$error.required">Mandatory*</label><br> -->
+								<button class="" data-ng-click="prevStep($event)">Previous
+									step&nbsp;&nbsp;&nbsp;</button>
+								<button class="" data-ng-click="submitted=true">&nbsp;&nbsp;&nbsp;Update</button>
+							</div>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+	</div>
+
+
+
+	<!-- Section: intro -->
+	<!--    <section id="intro" class="intro">
+		<div class="slogan">
+			<h1>This is Ninestars</h1>
+			<p>make awesome stuff with Bootstrap framework</p>
+			<a href="#about" class="btn btn-skin scroll">Learn more</a>
+		</div>	
+	</section> -->
+	<!-- /Section: intro -->
+
+
+
+
+
+
+
+
+
+	<!-- <footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-lg-12">
+		
+					<p>Copyright &copy; 2014 Ninestars - by <a href="http://bootstraptaste.com">Bootstraptaste</a></p>
+				</div>
+			</div>	
+		</div>
+	</footer> -->
+
+	<!-- Core JavaScript Files -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.easing.min.js"></script>
+	<script src="js/classie.js"></script>
+	<script src="js/gnmenu.js"></script>
+	<script src="js/jquery.scrollTo.js"></script>
+	<script src="js/nivo-lightbox.min.js"></script>
+	<script src="js/stellar.js"></script>
+	<!-- Custom Theme JavaScript -->
+	<script src="js/custom.js"></script>
+	<script src="js/long_menu.js"></script>
+
+</body>
+
+</html>

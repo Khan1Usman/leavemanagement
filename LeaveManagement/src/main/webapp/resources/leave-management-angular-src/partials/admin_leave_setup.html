@@ -1,0 +1,144 @@
+<style>
+.ng-touched.ng-invalid-required {
+	border-color: red;
+}
+/* Show red border when stuff has been typed in, but its invalid */
+.ng-dirty.ng-invalid {
+	border-color: red;
+}
+/*Show normal border color when typed in for the first time*/
+.ng-untouched.ng-invalid {
+	border-color: #ccc;
+}
+
+.ng-submitted input.ng-invalid {
+	border-color: red;
+}
+.ng-submitted select>option.ng.required{
+	border: 1px solid red;
+}
+
+.submitted .ng-invalid {
+	border: 1px solid red;
+}
+</style>
+<div class="container-fluid">
+	<div class="row">
+
+		<div id="large_menu" data-ng-class="{'div-animate': toggleSideMenu}"
+			class="col-lg-2 col-md-3 col-sm-3 menu_back" style="paddin: 0;">
+			<ul class="menu_large">
+				<li><a href="#about" class="gn-icon gn-icon-download">About</a></li>
+				<li><a href="#service" class="gn-icon gn-icon-cog">Service</a></li>
+				<li><a href="#works" class="gn-icon gn-icon-help">Works</a></li>
+				<li><a href="#contact" class="gn-icon gn-icon-archive">Contact</a></li>
+			</ul>
+		</div>
+		<div id="main_div"
+			class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1"
+			style="padding-top: 50px; text-align: center;">
+			<div class="cmn-t-border">
+				<form name="leaveSetupForm" data-ng-submit="saveLeaveSetupData(events, $index, leaveSetupForm.$valid)" novalidate>
+					<div class="white_box white_box_height">
+						<div class="col-lg-10 col-lg-offset-1">
+							<div class="row" style="margin-top: 1%; margin-bottom: 1%;">
+								<div class="col-lg-6">
+									<h3 id="events-editor">
+										<span class="pull-left"
+											style="font-family: 'Lato', Arial, sans-serif !important;">Manage
+											Leaves</span>
+									</h3>
+									<select  
+										style="margin: 16px 231px 5px 0px; padding: 5px; width: 201px;"
+										data-ng-model="leaveSetupYear" name="leaveSetupYear"
+										data-ng-change="leaveYearSelect(leaveSetupYear)"
+										data-ng-options=" leaveSetupYear as leaveSetupYear for  leaveSetupYear in leaveYearList"
+										required>
+										<option value="">..Choose Leave Year</option>
+									</select>
+									<sup style="margin:19px -25px 4px -1px;" data-ng-show="submitted && leaveSetupForm.leaveSetupYear.$error.required" class="red">Mandatory*</sup>
+								</div>
+								<!-- <div class="col-lg-6">
+								<button class="btn btn-primary pull-right"
+									data-ng-click="events.push({title: '', type: 'important'})">
+									<i class="fa fa-plus"></i> Add new
+								</button>
+								<div class="clearfix"></div>
+							</div> -->
+
+							</div>
+							<div id="leaveSetup" class="form-group">
+								<table class="table table-bordered">
+
+									<thead>
+										<tr>
+											<th>Title</th>
+											<th>Starts at</th>
+											<th>Ends at</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr data-ng-repeat="eventData in events track by $index">
+											<td><input type="text" class="form-control" name="title{{$index}}"
+												data-ng-model="eventData.title" placeholder="Title" required>
+												<input type="hidden" data-ng-model="eventData.type"
+												data-ng-value="'important'">
+												<label data-ng-show="submitted && leaveSetupForm.title{{$index}}.$error.required " class="red"></label>
+												</td>
+
+											<td><input name="leaveStartDate{{$index}}"
+												data-ng-change="setEventEndDate(eventData.startsAt,eventData.endsAt,$index)"
+												style="margin: 5px;" type="text" class="form-control"
+												data-ng-model="eventData.startsAt"
+												date-picker-leavemanagement="2015"
+												placeholder="Leave Start Date" required /> <!-- <input type="text" class="form-control" readonly datepicker-popup="medium" ng-model="event.startsAt"
+														is-open="event.startOpen" close-text="Close" /> <span class="input-group-btn">
+														<button type="button" class="btn btn-default" ng-click="toggle($event, 'startOpen', event)"
+															style="padding: 9px 12px; border-radius: 0px 5px 5px 0px;">
+															<i class="fa fa-calendar"></i>
+														</button> --> <!-- </p> --> <!-- <input type="hidden" ng-model="event.startsAt" hour-step="1" minute-step="15" show-meridian="true"> -->
+											<label data-ng-show="submitted && leaveSetupForm.leaveStartDate{{$index}}.$error.required " class="red"></label>
+											</td>
+											
+											<td><input name="leaveEndDate{{$index}}"
+												data-ng-change="setEventStartDate(eventData.startsAt,eventData.endsAt,$index)"
+												style="margin: 5px;" type="text" class="form-control"
+												readonly data-ng-model="eventData.endsAt"
+												date-picker-leavemanagement placeholder="Leave Start Date"
+												required />
+												<label data-ng-show="submitted && leaveSetupForm.leaveEnd{{$index}}.$error.required " class="red"></label>
+												</td>
+											<td><button class="btn btn-primary pull-left"
+													data-ng-click="eventTest($event); events.push({title: '', type: 'important'})">
+													<a></a><i class="fa fa-plus"></i></a>
+												</button> <!-- <div class="clearfix"></div> -->
+												<button class="btn btn-danger"
+													ng-click="events.splice($index, 1)"
+													data-ng-disabled="events.length==1"
+													style="margin: 0px 0px 0px 13px;">
+													<a></a><i class="fa fa-trash-o fa-lg"></i></a>
+												</button></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="col-lg-11">
+									<button class="btn btn-primary pull-right"
+										data-ng-click="submitted=true">Save</button>
+									<div class="clearfix"></div>
+								</div>
+								<div class="col-lg-1">
+									<input type="reset" class="btn btn-primary pull-right"
+										style="margin: 0px -20px 0px 0px;" value="Cancel" />
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

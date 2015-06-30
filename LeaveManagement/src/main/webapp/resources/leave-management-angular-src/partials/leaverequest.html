@@ -1,0 +1,53 @@
+<div class="container-fluid">
+	<div class="row">
+
+		<div id="large_menu" data-ng-class="{'div-animate': toggleSideMenu}" class="col-lg-2 col-md-3 col-sm-3 menu_back"
+			style="paddin: 0;">
+			<ul class="menu_large">
+				<li><a href="#about" class="gn-icon gn-icon-download">About</a></li>
+				<li><a href="#service" class="gn-icon gn-icon-cog">Service</a></li>
+				<li><a href="#works" class="gn-icon gn-icon-help">Works</a></li>
+				<li><a href="#contact" class="gn-icon gn-icon-archive">Contact</a></li>
+			</ul>
+		</div>
+		<div id="main_div" class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1"
+			style="padding-top: 30px;">
+			<div class="cmn-t-border">
+			<div class="white_box">
+				<ul class="company-social1" style="padding-left: 0px; padding-top: 7px;">
+					<li class="social-user"><a href="#" target="_blank"><i class="fa fa-user"></i></a></li>
+				</ul>
+
+				<div class="col-lg-10 col-lg-offset-1">
+					<div class="row">
+						<div class="col-lg-4">
+							<button class="btn btn-primary" mwl-date-modifier date="calendarDay" decrement="calendarView">Previous</button>
+
+							<button class="btn btn-default" mwl-date-modifier date="calendarDay" set-to-today>Today</button>
+
+							<button class="btn btn-primary" mwl-date-modifier date="calendarDay" increment="calendarView">Next</button>
+						</div>
+						<div class="col-lg-4">
+							<h2 class="text-center">{{ calendarTitle }}</h2>
+						</div>
+					</div>
+					<form>
+						<div class="form-group">
+							<!-- <mwl-calendar view="calendarView" current-day="calendarDay" events="events" view-title="calendarTitle"
+								on-event-click="eventClicked(calendarEvent)" edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
+								delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'" add-new-event-click="addNewEvent(calendarDate)"
+								on-edit-event-click="eventEdited(calendarEvent)" on-delete-event-click="eventDeleted(calendarEvent)"
+								auto-open="false" on-timespan-click="ontimespanclick(calendarDate)"> </mwl-calendar>
+						 -->
+						 <mwl-calendar view="calendarView" current-day="calendarDay" events="events" view-title="calendarTitle"
+								on-event-click="eventClicked(calendarEvent)" edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
+								delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'" add-new-event-click="addNewEvent(calendarDate)"
+								on-edit-event-click="eventEdited(calendarEvent)" on-delete-event-click="eventDeleted(calendarEvent)"
+								auto-open="false" on-timespan-click="ontimespanclick(calendarDate)"> </mwl-calendar>
+						 
+						 </div>
+					</form>
+				</div>
+			</div>
+			</div>
+		</div>

@@ -1,0 +1,22 @@
+img-crop {
+	width: 98%;
+	height: 100%;
+	display: block;
+	position: relative;
+	overflow: hidden;
+	border-style: outset;
+    border-width: 1px;
+}
+
+img-crop canvas {
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	outline: 0;
+	-webkit-tap-highlight-color: transparent;
+}
+
+/* .cropArea {
+	text-align: center;
+} */

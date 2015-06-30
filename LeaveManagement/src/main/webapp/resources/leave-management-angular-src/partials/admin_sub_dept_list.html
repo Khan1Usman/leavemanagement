@@ -1,0 +1,71 @@
+<div class="container-fluid">
+	<div id="large_menu" data-ng-class="{'div-animate': toggleSideMenu}"
+		class="col-lg-2 col-md-3 col-sm-3 menu_back" style="paddin: 0;">
+		<ul class="menu_large">
+			<li><a href="#about" class="gn-icon gn-icon-download">About</a></li>
+			<li><a href="#service" class="gn-icon gn-icon-cog">Service</a></li>
+			<li><a href="#works" class="gn-icon gn-icon-help">Works</a></li>
+			<li><a href="#contact" class="gn-icon gn-icon-archive">Contact</a></li>
+		</ul>
+	</div>
+	<div id="main_div">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<i class="fa fa-list"></i><b> Sub Department List</b>
+					</div>
+				</div>
+				<!-- /.panel-heading -->
+				<div class="panel-body white_box white_box_height">
+					<div class="table-responsive ">
+						<div class="" style="max-height: 500px; overflow: auto;">
+							<table class="table  table-bordered">
+								<thead>
+									<tr role="row">
+										<th class="text-center" rowspan="1" colspan="1">S.No</th>
+										<th class="text-center" rowspan="1" colspan="1">Sub Department Name</th>
+										<th class="text-center" rowspan="1" colspan="1">Sub Department Head</th>
+										<th class="text-center" rowspan="1" colspan="1">Leave Head Name</th>
+										<th class="text-center" rowspan="1" colspan="1">Description</th>
+										<th class="text-center" rowspan="1" colspan="1">Who</th>
+										<th class="text-center" rowspan="1" colspan="1">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+
+									<tr class=""
+										data-ng-repeat="subLists in subDepList track by $index">
+										<td class="text-center"><span> {{$index+1}}</span>
+										<td class="text-center"><span> {{subLists.subDepartmentName}}</span>
+										</td>
+										<td class="text-center"><span>{{subLists.managerName}}</span></td>
+
+										<td class="text-center"><span>
+												{{subLists.leaveHeadName}}</span></td>
+										<td class="text-center"><span>
+												{{subLists.description}}</span></td>
+										<td class="text-center"><span>
+												{{subLists.who}}</span></td>
+										<td class="text-center">
+											<div>
+												<a href="" data-ng-click="updateSubDeptSetup(subLists)"> <i style="margin: 0 0 0 11px;"
+													class="fa fa-edit"></i>
+												</a> <a href="" data-ng-click="deleteSubDept(subLists.id)"> <i
+													style="margin: 0 0 0 7px;" class="fa fa-trash-o"></i>
+												</a>
+											</div>
+										</td>
+
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<!-- /.panel-body -->
+		</div>
+	</div>
+</div>

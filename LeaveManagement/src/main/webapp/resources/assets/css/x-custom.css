@@ -1,0 +1,121 @@
+.row_margin {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	min-height: 75px;
+	padding: 23px;
+}
+
+.row_div_margin {
+	margin-left: 20% !important;
+	margin-right: 20% !important;
+	padding: 0%;
+	/* 	border: 1px solid red;
+ */
+}
+
+.maia-button {
+	background-color: #4173c9;
+	background-image: -moz-linear-gradient(center top, #5e8ee4, #4173c9);
+	border: 0 none;
+	border-radius: 2px;
+	color: #fff;
+	cursor: pointer;
+	display: inline-block;
+	font-family: arial, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 1.54;
+	padding: 7px 12px;
+	text-align: center;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.08);
+}
+
+.top {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	background: red;
+	-webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
+	transition: width 2s;
+	left: 1%;
+	top: 1%;
+}
+
+.bottom {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	background: green;
+	-webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
+	transition: width 2s;
+	right: 1%;
+	bottom: 88%;
+}
+
+.right {
+	position: absolute;
+	right: 1%; top : 1%;
+	width: 10px;
+	height: 10px;
+	
+	background: yellow;
+	-webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
+	transition: height 2s;
+	top: 1%;
+}
+
+.left {
+	position: absolute;
+	bottom: 88%;
+	left: 1%;
+	width: 10px;
+	height: 10px;
+	background: blue;
+	-webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
+	transition: up 2s;
+}
+
+.right:hover {
+	height: 50%;
+}
+
+.left:hover {
+	height: 300px;
+}
+
+.bottom:hover {
+	width: 98.01%;
+}
+
+.top:hover {
+	width: 98.01%;
+}
+
+.btn-outlined .line {
+	background: #787772 none repeat scroll 0 0;
+	display: block;
+	position: absolute;
+	transition-delay: 0s;
+	transition-duration: 0.45s;
+	transition-property: top, right, bottom, left, width, height;
+}
+
+.btn-outlined:hover .top {
+	width: 98.01%;
+	height: 10px;
+}
+
+.btn-outlined:hover  .right {
+	height: 10%;
+	width: 10px;
+}
+
+.btn-outlined:hover .left {
+	height: 10%;
+	width: 10px;
+}
+
+.btn-outlined:hover .bottom {
+	width: 98.01%;
+	height: 10px;
+}

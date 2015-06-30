@@ -1,0 +1,30 @@
+<div>
+	<form data-ng-submit="addLeaves()" name="leavePolicy" novalidate>
+		<ul>
+			<li>
+				<div year-drop>
+					<select ng-model="year" ng-options="y for y in years" ng-change="getYearLeave(year)"></select>
+				</div>
+				 <input  ng-model="leavesType" readonly="readonly"	required> 
+			</li>
+			<li data-ng-repeat="type in types track by $index"><label>Leave
+					Type</label> <select data-ng-model="type.leaveType"
+				name="leaveType_{{$index}}" required>
+					<option ng-selected="selected">--select leave--</option>
+					<option data-ng-repeat="leavePolicyData in leavePolicies"
+						value={{leavePolicyData.leaveName}}>{{leavePolicyData.leaveName}}</option>
+			</select>   
+				<span class="error"
+				ng-show="submitted && leavePolicy.leaveType_{{$index}}.$error.required">Type
+					is required.</span> <label>Total Leaves</label> <input type="number"
+				name="totalLeaves_{{$index}}" ng-model="type.totalLeaves" required>
+				<span class="error"
+				ng-show="submitted && leavePolicy.totalLeaves_{{$index}}.$error.required">
+					Required!</span> <span class="error"
+				ng-show="leavePolicy.totalLeaves_{{$index}}.$error.number">
+					Not valid number!</span> <a href="" data-ng-click="addMore()">More</a> <a
+				href="" data-ng-click="remove($index)">Remove</a></li>
+		</ul>
+		<input type="submit" value="Submit" ng-click="submitted=true">
+	</form>
+</div>

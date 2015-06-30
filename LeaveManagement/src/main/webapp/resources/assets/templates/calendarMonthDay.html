@@ -1,0 +1,38 @@
+<div class="cal-month-day" data-ng-mouseenter="mouseEnter=true;"
+data-ng-mouseleave="mouseEnter=false;"
+	data-ng-class="{
+            'cal-day-outmonth': !day.inMonth,
+            'cal-day-inmonth': day.inMonth,
+            'cal-day-weekend': day.isWeekend,
+            'cal-day-past': day.isPast,
+            'cal-day-today': day.isToday,
+            'cal-day-future': day.isFuture
+          }">
+	<div class="row">
+		<div class="col-lg-6">
+			<small class="cal-events-num badge badge-important pull-left" data-ng-show="day.badgeTotal > 0"
+				data-ng-bind="day.badgeTotal"> </small>
+		</div>
+		<div class="col-lg-6">
+			<span class="pull-right" data-cal-date data-ng-click="vm.calendarCtrl.drillDown(day.date)" data-ng-bind="day.label">{{onEventClick}}
+			</span>
+		</div>
+	</div>
+
+	<div class="row" data-ng-hide="day.isPast">
+		<div class="col-lg-7 col-lg-offset-4" style="margin-top: -10px ! important;opacity:0.5px;" data-ng-show="mouseEnter">
+			<small data-ng-click="vm.calendarCtrl.addNew(day.date)" class="cal-events-num badge badge-important pull-left" style="background-color:#428bca !important"
+				><i class="fa fa-plus"></i> </small>
+		</div>
+	</div>
+
+	<div>
+		<div class="cal-day-tick"
+			data-ng-show="dayIndex === vm.openDayIndex && vm.view[vm.openDayIndex].events.ledata-ngth > 0">
+			<i class="glyphicon glyphicon-chevron-up"></i> <i class="fa fa-chevron-up"></i>
+		</div>
+	</div>
+	<div>
+		<div data-ng-include="'./resources/assets/templates/calendarMonthEventsList.html'"></div>
+	</div>
+</div>

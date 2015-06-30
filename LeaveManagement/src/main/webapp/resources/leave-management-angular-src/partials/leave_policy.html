@@ -1,0 +1,45 @@
+<div>
+	<form data-ng-submit="addLeaves()" name="leavePolicy" novalidate>
+		<ul>
+			<li>
+				<div data-year-drop>
+					Year: <select data-ng-model="year"
+						data-ng-options="y for y in years"  required></select>
+					<span class="error"
+						data-ng-show="submitted && leavePolicy.year.$error.required">Required
+						!</span> Full/Partial :<select data-ng-model="leavesType"
+						name="leavesType" required>
+						<option data-ng-selected="true" value="">--select leaves
+							type--</option>
+						<option value="full">Full</option>
+						<option value="partial">Partial</option>
+					</select> <span class="error"
+						data-ng-show="submitted && leavePolicy.leavesType.$error.required">Required
+						!</span>
+					<!-- Gender : <select data-ng-model="gender" name="gender" required>
+						<option data-ng-selected="true" value="">--select
+							gender--</option>
+						<option value="male">Male</option>
+						<option value=female>Female</option>
+					</select> <span class="error"
+						data-ng-show="submitted && leavePolicy.gender.$error.required">
+						Required !</span> -->
+				</div>
+
+			</li>
+			<li data-ng-repeat="type in types | orderBy:'$index':true"><label>Leave
+					Type</label> <input type="text" ng-model="type.leaveType"
+				name="leaveType_{{$index}}" required> <span class="error"
+				ng-show="submitted && leavePolicy.leaveType_{{$index}}.$error.required">Type
+					is required.</span> <label>Total Leaves</label> <input type="number"
+				name="totalLeaves_{{$index}}" ng-model="type.totalLeaves" required>
+				<span class="error"
+				ng-show="submitted && leavePolicy.totalLeaves_{{$index}}.$error.required">
+					Required!</span> <span class="error"
+				ng-show="leavePolicy.totalLeaves_{{$index}}.$error.number">
+					Not valid number!</span> <a href="" data-ng-click="addMore()">More</a>
+				<a href="" data-ng-click="remove($index)">Remove</a></li>
+		</ul>
+		<input type="submit" value="Submit" ng-click="submitted=true">
+	</form>
+</div>
